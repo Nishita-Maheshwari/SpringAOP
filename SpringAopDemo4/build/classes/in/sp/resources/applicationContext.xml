@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- target -->
+    <bean id="bankServiceImpl" class="in.sp.services.BankServiceImpl" />
+    
+    <!-- advices -->
+    <bean id="loggingAdvice" class="in.sp.advices.LoggingAdvice" />
+    <bean id="securityAdvice" class="in.sp.advices.SecurityAdvice" />
+    
+    <!-- pointcut -->
+    <bean id="loggingPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedNames">
+            <array>
+                <value>mobileBankingTransaction</value>
+                <value>internetBankingTransaction</value>
+            </array>
+        </property>
+    </bean>
+    
+    <bean id="securityPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedNames">
+            <array>
+                <value>transactionUsingUpi</value>
+                <value>mobileBankingTransaction</value>
+                <value>internetBankingTransaction</value>
+            </array>
+        </property>
+    </bean>
+    
+    
+    <!-- advisor -->
+    <bean id="loggingAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="loggingAdvice" />
+        <property name="pointcut" ref="loggingPointcut" />
+    </bean>
+    
+    <bean id="securityAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="securityAdvice" />
+        <property name="pointcut" ref="securityPointcut" />
+    </bean>
+    
+    <!-- proxy -->
+    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="bankServiceImpl" />
+        <property name="interceptorNames">
+            <list>
+                <value>loggingAdvisor</value>
+                <value>securityAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
