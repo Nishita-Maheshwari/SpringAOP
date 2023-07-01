@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- target -->
+    <bean id="bankServiceImpl" class="in.sp.services.BankServiceImpl" />
+    
+    <!-- advice -->
+    <bean id="loggingAdvice" class="in.sp.advices.LoggingAdvice" />
+    
+    <!-- proxy -->
+    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="bankServiceImpl" />
+        <property name="interceptorNames">
+            <list>
+                <value>loggingAdvice</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>

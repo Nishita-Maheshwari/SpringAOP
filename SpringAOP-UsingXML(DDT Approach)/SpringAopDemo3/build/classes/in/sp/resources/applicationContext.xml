@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- target -->
+    <bean id="bankServiceImpl" class="in.sp.services.BankServiceImpl" />
+    
+    <!-- advice -->
+    <bean id="loggingAdvice" class="in.sp.advices.LoggingAdvice" />
+    
+    <!-- pointcut -->
+    <bean id="nameMatchMethodPointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+        <property name="mappedNames">
+            <array>
+                <value>mobileBankingTransaction</value>
+                <value>internetBankingTransaction</value>
+            </array>
+        </property>
+    </bean>
+    
+    <!-- advisor -->
+    <bean id="defaultPointcutAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+        <property name="advice" ref="loggingAdvice" />
+        <property name="pointcut" ref="nameMatchMethodPointcut" />
+    </bean>
+    
+    <!-- proxy -->
+    <bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="bankServiceImpl" />
+        <property name="interceptorNames">
+            <list>
+                <value>defaultPointcutAdvisor</value>
+            </list>
+        </property>
+    </bean>
+    
+</beans>
