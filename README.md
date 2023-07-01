@@ -6,15 +6,18 @@
 # => AOP :-
 	-> Full form of AOP is Aspect-Orieted Programming
 	-> AOP was developed by Gregor Kiczales while working at Xerox PARC (California)
-	-> AOP is a "Programming Paradiagm" (methodology / programming approch) which is implemented by a lot of languages like Java, C++, PHP, Python, XML etc
+	-> AOP is a "Programming Paradiagm" (methodology / programming approch) which is implemented by a lot of languages 
+          like Java, C++, PHP, Python, XML etc
 	
 	-> Basically AOP complements for OOP by thinking about another programming structure in order to achieve more and clear modularity.
 	
 	-> What is the need of AOP ?
-		= Scenerio : Create banking app having multiple transactions (UPI, mobile or internet banking, wallet etc) which will also use security, logging, otp, notification / sms etc
+		= Scenerio : Create banking app having multiple transactions (UPI, mobile or internet banking, wallet etc) 
+                     which will also use security, logging, otp, notification / sms etc
 		
-		= Problem : We can create the application using simple OOP's programming paradiagm but if in future client says that instead of using sendSms() i have to use sendNotification() service,
-         then we have to change the methods. This can lead to maintainance problem. 
+		= Problem : We can create the application using simple OOP's programming paradiagm but if in future client says that instead of
+                          using sendSms() i have to use sendNotification() service,
+                          then we have to change the methods. This can lead to maintainance problem. 
           Another disadvantage is that we provide service logic in business logic methods which leads to modularity problem.
 		
 		= TO remove above proble we use AOP programming paradiagm
@@ -30,7 +33,7 @@
     
     
     
-    ![image](https://github.com/Nishita-Maheshwari/SpringAOP/assets/47790697/24b10667-d867-4681-b438-eeafe4bcd602)
+![image](https://github.com/Nishita-Maheshwari/SpringAOP/assets/47790697/18c8457a-2c0c-4bdc-8a6b-9173002a97c3)
 
 		
 --------------------------------------------
@@ -78,14 +81,17 @@
 	-> There are 5 types of advices :-
 		1. Before Advice : run the advice before the method execution
 		2. After Advice : run the advice after the method execution
-		3. After Returning Advice : run the advice after the method execution but the method should not throw any runtime exception (in same cases [Spring XML file implementation] 2 and 3 are same and in same cases [annotations implementation] they are different)
+		3. After Returning Advice : run the advice after the method execution but the method should not 
+                  throw any runtime exception (in same cases [Spring XML file implementation] 2 and 3 are same
+                           and in same cases [annotations implementation] they are different)
 		4. After Throwing Advice : run the advice after the method execution only if method throws an exception
 		5. Around Advice : run the advice before and after the method execution
 
 
 # => Join-points :-
 	-> A join-point is the point in the application where an aspect or advice can be applied or plugged in
-	-> A join-point can be before or after executing method, before throwing an exception, before or after modifying an instance variable etc
+	-> A join-point can be before or after executing method, before throwing an exception,
+                      before or after modifying an instance variable etc
 	
 	
 # => Pointcut :-
